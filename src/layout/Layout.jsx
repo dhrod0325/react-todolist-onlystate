@@ -5,7 +5,6 @@ export const Layout = ({children}) => {
                 <div className="col-md-12">
                     <div className="card px-3">
                         <div className="card-body">
-                            <h2 className="card-title">TODO LIST</h2>
                             {children}
                         </div>
                     </div>

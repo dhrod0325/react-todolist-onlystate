@@ -22,20 +22,26 @@ export const TodoItem = ({
                     <i className="input-helper"/>
                 </label>
                 {inputEdit[todo.id] ?
-                    <form onSubmit={handleModifySaveTodo(todo)} style={{display: "inline-block"}}>
-                        <input type="text"
-                               onChange={onChange}
-                               value={input}
-                               className="form-control"/>
+                    <>
+                        <span>{todo.message}</span>
 
-                        <button className="btn btn-sm btn-primary">저장</button>
+                        <form onSubmit={handleModifySaveTodo(todo)}
+                              className="d-flex gap-2 mt-2">
+                            <input type="text"
+                                   onChange={onChange}
+                                   value={input}
+                                   className="form-control"/>
 
-                        <button type="button"
-                                className="btn btn-sm btn-danger"
-                                onClick={handleModifyTodo(todo)}>
-                            취소
-                        </button>
-                    </form> :
+                            <button className="btn btn-sm btn-primary">저장</button>
+
+                            <button type="button"
+                                    className="btn btn-sm btn-danger"
+                                    onClick={handleModifyTodo(todo)}>
+                                취소
+                            </button>
+                        </form>
+                    </>
+                    :
                     <span onClick={handleModifyTodo(todo)}>{!inputEdit[todo.id] && todo.message}</span>}
             </div>
 

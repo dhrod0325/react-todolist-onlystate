@@ -4,6 +4,7 @@ import {TodoList} from "../components/TodoList";
 import {useEffect, useState} from "react";
 import {Layout} from "../layout/Layout";
 import {TodoService} from "../lib/TodoService";
+import {Header} from "../layout/Header";
 
 export const Main = ({todoStorage}) => {
     const [todoList, setTodoList] = useState(todoStorage.getList());
@@ -31,6 +32,7 @@ export const Main = ({todoStorage}) => {
 
     return (
         <Layout>
+            <Header/>
             <TodoInput {...todoInputProps}/>
             <TodoList {...todoListProps}/>
         </Layout>
