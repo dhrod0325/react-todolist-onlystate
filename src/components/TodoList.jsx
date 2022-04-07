@@ -76,5 +76,6 @@ export const TodoList = ({todoList, removeTodo, changeCheckedTodo, saveTodo}) =>
                     </li>
                 )}
             </ul>
-        </div>);
+        </div>
+    );
 }
