@@ -59,9 +59,7 @@ export const TodoList = ({todoList, removeTodo, changeCheckedTodo, saveTodo}) =>
 
     return (<div className="list-wrapper">
         <ul className="d-flex flex-column-reverse todo-list" role="todoList">
-            {todoList.map(todo =>
-                <TodoItem {...props} todo={todo} key={todo.id}/>
-            )}
+            {todoList.map(todo => <TodoItem {...props} todo={todo} key={todo.id}/>)}
         </ul>
     </div>);
 }

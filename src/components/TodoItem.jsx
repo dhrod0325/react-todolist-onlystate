@@ -10,7 +10,7 @@ export const TodoItem = ({
                          }) => {
 
     return (
-        <li  role="todoListItem">
+        <li role="todoListItem">
             <div className="form-check">
                 <label className="form-check-label">
                     <input className="checkbox"
@@ -25,11 +25,15 @@ export const TodoItem = ({
                     <form onSubmit={handleModifySaveTodo(todo)} style={{display: "inline-block"}}>
                         <input type="text"
                                onChange={onChange}
-                               value={input}/>
-                        <button>save</button>
+                               value={input}
+                               className="form-control"/>
+
+                        <button className="btn btn-sm btn-primary">저장</button>
+
                         <button type="button"
+                                className="btn btn-sm btn-danger"
                                 onClick={handleModifyTodo(todo)}>
-                            cancel
+                            취소
                         </button>
                     </form> :
                     <span onClick={handleModifyTodo(todo)}>{!inputEdit[todo.id] && todo.message}</span>}
