@@ -8,7 +8,9 @@ import {Main} from './page/Main'
 
 import {todoStorage} from "./lib/TodoStorage";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+const container = document.getElementById('root');
+
+ReactDOM.createRoot(container).render(
     <React.StrictMode>
         <Main todoStorage={todoStorage}/>
     </React.StrictMode>
