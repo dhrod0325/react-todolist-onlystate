@@ -1,8 +1,8 @@
 import {useState} from "react";
 
 export const TodoList = ({todoList, removeTodo, changeCheckedTodo, saveTodo}) => {
-    const [inputTodo, setInputTodo] = useState();
-    const [editState, setEditState] = useState({});
+    const [input, setInput] = useState('');
+    const [inputEdit, setInputEdit] = useState({});
 
     const handleCheckChanged = (todo) => {
         return e => {
@@ -20,10 +20,11 @@ export const TodoList = ({todoList, removeTodo, changeCheckedTodo, saveTodo}) =>
         return e => {
             e.preventDefault();
 
-            Object.keys(editState).filter(key => key !== todo.id).forEach(key => editState[key] = false);
-            editState[todo.id] = !editState[todo.id];
-            setInputTodo(todo.message);
-            setEditState({...editState});
+            Object.keys(inputEdit).filter(key => key !== todo.id).forEach(key => inputEdit[key] = false);
+            inputEdit[todo.id] = !inputEdit[todo.id];
+
+            setInput(todo.message);
+            setInputEdit({...inputEdit});
         };
     }
 
@@ -31,18 +32,18 @@ export const TodoList = ({todoList, removeTodo, changeCheckedTodo, saveTodo}) =>
         return e => {
             e.preventDefault();
 
-            if (!inputTodo) {
+            if (!input) {
                 return alert('할 일을 입력하세요');
             }
 
-            Object.keys(editState).forEach(key => editState[key] = false);
-            setEditState({...editState});
-            saveTodo(todo, inputTodo);
+            Object.keys(inputEdit).forEach(key => inputEdit[key] = false);
+            setInputEdit({...inputEdit});
+            saveTodo(todo, input);
         };
     }
 
     const onChange = e => {
-        setInputTodo(e.target.value);
+        setInput(e.target.value);
     }
 
     return (
@@ -59,15 +60,15 @@ export const TodoList = ({todoList, removeTodo, changeCheckedTodo, saveTodo}) =>
                                        role="todoChecked"/>
                                 <i className="input-helper"/>
                             </label>
-                            {editState[todo.id] ?
+                            {inputEdit[todo.id] ?
                                 <form onSubmit={handleModifySaveTodo(todo)} style={{display: "inline-block"}}>
                                     <input type="text"
                                            onChange={onChange}
-                                           value={inputTodo}/>
+                                           value={input}/>
                                     <button>save</button>
                                     <button type="button" onClick={handleModifyTodo(todo)}>cancel</button>
                                 </form> :
-                                <span onClick={handleModifyTodo(todo)}>{!editState[todo.id] && todo.message}</span>}
+                                <span onClick={handleModifyTodo(todo)}>{!inputEdit[todo.id] && todo.message}</span>}
                         </div>
 
                         <i className="remove mdi mdi-close-circle-outline"
