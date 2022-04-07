@@ -46,37 +46,36 @@ export const TodoList = ({todoList, removeTodo, changeCheckedTodo, saveTodo}) =>
         setInput(e.target.value);
     }
 
-    return (
-        <div className="list-wrapper">
+    return (<div className="list-wrapper">
             <ul className="d-flex flex-column-reverse todo-list" role="todoList">
-                {todoList.map(todo =>
-                    <li key={todo.id} role="todoListItem">
-                        <div className="form-check">
-                            <label className="form-check-label">
-                                <input className="checkbox"
-                                       type="checkbox"
-                                       checked={todo.checked}
-                                       onChange={handleCheckChanged(todo)}
-                                       role="todoChecked"/>
-                                <i className="input-helper"/>
-                            </label>
-                            {inputEdit[todo.id] ?
-                                <form onSubmit={handleModifySaveTodo(todo)} style={{display: "inline-block"}}>
-                                    <input type="text"
-                                           onChange={onChange}
-                                           value={input}/>
-                                    <button>save</button>
-                                    <button type="button" onClick={handleModifyTodo(todo)}>cancel</button>
-                                </form> :
-                                <span onClick={handleModifyTodo(todo)}>{!inputEdit[todo.id] && todo.message}</span>}
-                        </div>
+                {todoList.map(todo => <li key={todo.id} role="todoListItem">
+                    <div className="form-check">
+                        <label className="form-check-label">
+                            <input className="checkbox"
+                                   type="checkbox"
+                                   checked={todo.checked}
+                                   onChange={handleCheckChanged(todo)}
+                                   role="todoChecked"/>
+                            <i className="input-helper"/>
+                        </label>
+                        {inputEdit[todo.id] ?
+                            <form onSubmit={handleModifySaveTodo(todo)} style={{display: "inline-block"}}>
+                                <input type="text"
+                                       onChange={onChange}
+                                       value={input}/>
+                                <button>save</button>
+                                <button type="button"
+                                        onClick={handleModifyTodo(todo)}>
+                                    cancel
+                                </button>
+                            </form> :
+                            <span onClick={handleModifyTodo(todo)}>{!inputEdit[todo.id] && todo.message}</span>}
+                    </div>
 
-                        <i className="remove mdi mdi-close-circle-outline"
-                           onClick={handleRemoveButtonClicked(todo)}
-                           role="removeTodo"/>
-                    </li>
-                )}
+                    <i className="remove mdi mdi-close-circle-outline"
+                       onClick={handleRemoveButtonClicked(todo)}
+                       role="removeTodo"/>
+                </li>)}
             </ul>
-        </div>
-    );
+        </div>);
 }
