@@ -12,17 +12,10 @@ export const TodoContainer = ({todoStorage}) => {
         todoStorage.save(todoList);
     }, [todoList]);
 
-    const onSubmitInput = (todo) =>
-        setTodoList(todoService.add(todo));
-
-    const onClickRemove = (todo) =>
-        setTodoList(todoService.remove(todo));
-
-    const onChangeCheck = (todo, checked) =>
-        setTodoList(todoService.update(todo, {checked}));
-
-    const onSubmitModify = (todo, message) =>
-        setTodoList(todoService.update(todo, {message}));
+    const onSubmitInput = (todo) => setTodoList(todoService.add(todo));
+    const onClickRemove = (todo) => setTodoList(todoService.remove(todo));
+    const onChangeCheck = (todo, checked) => setTodoList(todoService.update(todo, {checked}));
+    const onSubmitModify = (todo, message) => setTodoList(todoService.update(todo, {message}));
 
     const todoInputProps = {
         onSubmitInput
