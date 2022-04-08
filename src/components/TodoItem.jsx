@@ -1,43 +1,43 @@
-import {TodoModify} from "./TodoModify";
+import {useState} from "react";
+import {TodoModify} from "./TodoModifyText";
 
 export const TodoItem = ({
-                             todo,
-                             handleCheckChanged,
-                             handleModifySaveTodo,
-                             handleModifyTodo,
-                             handleRemoveButtonClicked,
-                             input,
-                             inputEdit,
-                             onChange
+                             text,
+                             check = false,
+                             onChangeCheck,
+                             onSubmitModify,
+                             onClickRemove
                          }) => {
+    const [checked, setChecked] = useState(check);
 
-    const {checked} = todo;
+    const handleChangeCheck = ({target: {checked}}) => {
+        setChecked(checked);
+        onChangeCheck(checked);
+    }
+
+    const handleClickRemove = () => {
+        onClickRemove();
+    }
 
     return (
-        <li role="todoListItem">
+        <>
             <div className="form-check">
                 <label className="form-check-label">
                     <input className="checkbox"
                            type="checkbox"
                            checked={checked}
-                           onChange={handleCheckChanged(todo)}
+                           onChange={handleChangeCheck}
                            role="todoChecked"/>
                     <i className="input-helper"/>
                 </label>
 
-                <TodoModify {...{
-                    todo,
-                    handleModifySaveTodo,
-                    handleModifyTodo,
-                    onChange,
-                    input,
-                    inputEdit
-                }}/>
-
+                <TodoModify text={text}
+                            onSubmitModify={onSubmitModify}/>
             </div>
 
             <i className="remove mdi mdi-close-circle-outline"
-               onClick={handleRemoveButtonClicked(todo)}
+               onClick={handleClickRemove}
                role="removeTodo"/>
-        </li>)
+        </>
+    )
 }

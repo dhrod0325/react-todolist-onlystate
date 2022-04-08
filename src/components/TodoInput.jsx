@@ -1,6 +1,6 @@
 import {createRef, useEffect, useState} from "react";
 
-export const TodoInput = ({addTodo}) => {
+export const TodoInput = ({onSubmitInput}) => {
     const [inputText, setInputText] = useState('');
 
     const inputRef = createRef();
@@ -14,7 +14,7 @@ export const TodoInput = ({addTodo}) => {
         $inputElement().value = inputText;
     }, [inputText]);
 
-    const addInput = event => {
+    const handleSubmitInput = event => {
         event.preventDefault();
 
         if (!inputText) {
@@ -22,16 +22,17 @@ export const TodoInput = ({addTodo}) => {
             return alert('할일을 입력하세요');
         }
 
-        addTodo({message: inputText});
+        onSubmitInput({message: inputText});
+
         setInputText('');
     }
 
-    const onChange = e => {
-        setInputText(e.target.value);
+    const onChange = ({target: {value}}) => {
+        setInputText(value);
     }
 
     return (
-        <form className="add-items d-flex" onSubmit={addInput}>
+        <form className="add-items d-flex" onSubmit={handleSubmitInput}>
             <input type="text"
                    ref={inputRef}
                    id="input"

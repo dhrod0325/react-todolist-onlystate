@@ -1,65 +1,48 @@
-import {useState} from "react";
 import {TodoItem} from "./TodoItem";
 
-export const TodoList = ({todoList, removeTodo, changeCheckedTodo, saveTodo}) => {
-    const [input, setInput] = useState('');
-    const [inputEdit, setInputEdit] = useState({});
-
-    const handleCheckChanged = (todo) => {
-        return e => {
-            changeCheckedTodo(todo, e.target.checked);
+export const TodoList = ({
+                             todoList,
+                             onClickRemove,
+                             onChangeCheck,
+                             onSubmitModify
+                         }) => {
+    const handleChangeCheck = (todo) => {
+        return checked => {
+            onChangeCheck(todo, checked);
         };
     }
 
-    const handleRemoveButtonClicked = (todo) => {
+    const handleClickRemove = (todo) => {
         return () => {
-            removeTodo(todo);
+            onClickRemove(todo);
         };
     }
 
-    const handleModifyTodo = (todo) => {
-        return e => {
-            e.preventDefault();
-
-            Object.keys(inputEdit).filter(key => key !== todo.id).forEach(key => inputEdit[key] = false);
-            inputEdit[todo.id] = !inputEdit[todo.id];
-
-            setInput(todo.message);
-            setInputEdit({...inputEdit});
-        };
-    }
-
-    const handleModifySaveTodo = (todo) => {
-        return e => {
-            e.preventDefault();
-
-            if (!input) {
+    const handleSaveModify = (todo) => {
+        return text => {
+            if (!text) {
                 return alert('할 일을 입력하세요');
             }
 
-            Object.keys(inputEdit).forEach(key => inputEdit[key] = false);
-            setInputEdit({...inputEdit});
-            saveTodo(todo, input);
+            onSubmitModify(todo, text);
         };
     }
 
-    const onChange = e => {
-        setInput(e.target.value);
-    }
-
-    const props = {
-        input,
-        inputEdit,
-        handleCheckChanged,
-        handleModifySaveTodo,
-        handleModifyTodo,
-        handleRemoveButtonClicked,
-        onChange
-    }
-
-    return (<div className="list-wrapper">
-        <ul className="d-flex flex-column-reverse todo-list" role="todoList">
-            {todoList.map(todo => <TodoItem {...props} todo={todo} key={todo.id}/>)}
-        </ul>
-    </div>);
+    return (
+        <div className="list-wrapper">
+            <ul className="d-flex flex-column-reverse todo-list" role="todoList">
+                {todoList.map(todo =>
+                    <li role="todoListItem" key={todo.id}>
+                        <TodoItem
+                            text={todo.message}
+                            check={todo.checked}
+                            onSubmitModify={handleSaveModify(todo)}
+                            onChangeCheck={handleChangeCheck(todo)}
+                            onClickRemove={handleClickRemove(todo)}
+                        />
+                    </li>
+                )}
+            </ul>
+        </div>
+    );
 }
