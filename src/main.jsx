@@ -6,12 +6,10 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {Main} from './page/Main'
 
-import {todoStorage} from "./lib/TodoStorage";
-
 const container = document.getElementById('root');
 
 ReactDOM.createRoot(container).render(
     <React.StrictMode>
-        <Main todoStorage={todoStorage}/>
+        <Main/>
     </React.StrictMode>
 )

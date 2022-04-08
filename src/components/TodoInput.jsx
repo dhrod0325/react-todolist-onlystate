@@ -1,37 +1,39 @@
 import {createRef, useEffect, useState} from "react";
-import {v4 as uuid} from "uuid";
 
 export const TodoInput = ({addTodo}) => {
-    const [input, setInput] = useState('');
+    const [inputText, setInputText] = useState('');
 
-    const $input = createRef();
+    const inputRef = createRef();
+    const $inputElement = () => inputRef.current;
 
     useEffect(() => {
-        $input.current.focus();
+        $inputElement().focus();
     }, []);
+
+    useEffect(() => {
+        $inputElement().value = inputText;
+    }, [inputText]);
 
     const addInput = event => {
         event.preventDefault();
 
-        if (!input) {
-            $input.current.focus();
+        if (!inputText) {
+            $inputElement().focus();
             return alert('할일을 입력하세요');
         }
 
-        addTodo({id: uuid(), message: input, checked: false, editState: false});
-
-        setInput('');
-        $input.current.value = '';
+        addTodo({message: inputText});
+        setInputText('');
     }
 
     const onChange = e => {
-        setInput(e.target.value);
+        setInputText(e.target.value);
     }
 
     return (
         <form className="add-items d-flex" onSubmit={addInput}>
             <input type="text"
-                   ref={$input}
+                   ref={inputRef}
                    id="input"
                    className="form-control todo-list-input"
                    placeholder="해야 할 일을 입력하세요"

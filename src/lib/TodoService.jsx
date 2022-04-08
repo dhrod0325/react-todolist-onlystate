@@ -1,7 +1,11 @@
+import {v4 as uuid} from "uuid";
+
 export const TodoService = (todoList) => {
     return {
         add: (todo) => {
-            return [...todoList, todo];
+            const addTodo = {id: uuid(), checked: false, editState: false, ...todo};
+
+            return [...todoList, addTodo];
         },
         remove: (todo) => {
             todoList.splice(todoList.indexOf(todo), 1);
