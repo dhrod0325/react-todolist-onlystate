@@ -8,14 +8,8 @@ export const TodoItem = ({text, check = false, onChangeCheck, onSubmitModify, on
         setChecked(checked);
         onChangeCheck(checked);
     }
-
-    const handleClickRemove = () => {
-        onClickRemove();
-    }
-
-    const handleSubmitModify = () => {
-        onSubmitModify();
-    }
+    const handleClickRemove = () => onClickRemove();
+    const handleSubmitModify = text => onSubmitModify(text);
 
     return (
         <>
