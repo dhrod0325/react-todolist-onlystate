@@ -2,7 +2,6 @@ import {createRef, useEffect, useState} from "react";
 
 export const TodoInput = ({onSubmitInput}) => {
     const [inputText, setInputText] = useState('');
-
     const inputRef = createRef();
     const $inputElement = () => inputRef.current;
 

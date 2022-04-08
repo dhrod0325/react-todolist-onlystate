@@ -1,11 +1,6 @@
 import {TodoItem} from "./TodoItem";
 
-export const TodoList = ({
-                             todoList,
-                             onClickRemove,
-                             onChangeCheck,
-                             onSubmitModify
-                         }) => {
+export const TodoList = ({todoList, onClickRemove, onChangeCheck, onSubmitModify}) => {
     const handleChangeCheck = (todo) => {
         return checked => {
             onChangeCheck(todo, checked);
@@ -18,11 +13,9 @@ export const TodoList = ({
         };
     }
 
-    const handleSaveModify = (todo) => {
+    const handleSubmitModify = (todo) => {
         return text => {
-            if (!text) {
-                return alert('할 일을 입력하세요');
-            }
+            if (!text) return alert('할 일을 입력하세요');
 
             onSubmitModify(todo, text);
         };
@@ -36,7 +29,7 @@ export const TodoList = ({
                         <TodoItem
                             text={todo.message}
                             check={todo.checked}
-                            onSubmitModify={handleSaveModify(todo)}
+                            onSubmitModify={handleSubmitModify(todo)}
                             onChangeCheck={handleChangeCheck(todo)}
                             onClickRemove={handleClickRemove(todo)}
                         />
