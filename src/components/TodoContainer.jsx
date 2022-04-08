@@ -1,6 +1,7 @@
+import {useEffect, useState} from "react";
+
 import {TodoInput} from "./TodoInput";
 import {TodoList} from "./TodoList";
-import {useEffect, useState} from "react";
 import {TodoService} from "../lib/TodoService";
 
 export const TodoContainer = ({todoStorage}) => {
