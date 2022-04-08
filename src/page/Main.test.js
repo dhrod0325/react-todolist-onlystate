@@ -1,6 +1,6 @@
 import {fireEvent, render, screen} from '@testing-library/react';
-import {Main} from './Main';
 import userEvent from "@testing-library/user-event";
+import {TodoContainer} from "../components/TodoContainer";
 
 describe('TODO-LIST 테스트', () => {
     const mockStorage = {
@@ -11,12 +11,7 @@ describe('TODO-LIST 테스트', () => {
     }
 
     beforeEach(() => {
-        render(<Main todoStorage={mockStorage}/>);
-    });
-
-    test('초기화면 테스트', () => {
-        const $title = screen.getByText(/TODO LIST/i);
-        expect($title).toBeInTheDocument();
+        render(<TodoContainer todoStorage={mockStorage}/>);
     });
 
     async function addTodo() {
@@ -42,6 +37,7 @@ describe('TODO-LIST 테스트', () => {
         await userEvent.click($button);
 
         const $todoList = screen.getByRole('todoList');
+
         expect($todoList).toBeEmptyDOMElement();
     });
 });
