@@ -11,13 +11,15 @@ export const TodoItem = ({
                              onChange
                          }) => {
 
+    const {checked} = todo;
+
     return (
         <li role="todoListItem">
             <div className="form-check">
                 <label className="form-check-label">
                     <input className="checkbox"
                            type="checkbox"
-                           checked={todo.checked}
+                           checked={checked}
                            onChange={handleCheckChanged(todo)}
                            role="todoChecked"/>
                     <i className="input-helper"/>
